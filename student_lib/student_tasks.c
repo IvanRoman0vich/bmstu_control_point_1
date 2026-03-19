@@ -237,6 +237,19 @@ int *twoSum(const int *arr, int size, int target) {
   // TODO: Найти два индекса i, j (i < j) таких, что arr[i] + arr[j] == target
   // Вернуть массив из двух элементов, выделенный через malloc
   // Если пара не найдена, вернуть NULL
+
+  int *res = (int*)malloc(2*sizeof(int));
+
+  for(int i = 0; i < size; i++){
+    for(int j = 1; j < size; j++){
+      if(arr[i] + arr[j] == target){
+        res[0] = i;
+        res[1] = j;
+        return res;
+      }
+    }
+  }
+  free(res);
   return NULL;
 }
 
@@ -247,10 +260,34 @@ int *filterPositive(const int *arr, int size, int *resultSize) {
   // TODO: Создать новый массив (malloc) только с положительными элементами
   // Записать размер в *resultSize
   // Если положительных нет, вернуть NULL и *resultSize = 0
-
+  int count;
+  for(int i = 0; i < size; i++){
+    if (arr[i] > 0){
+      count++;
+    }
+  }
   
-  *resultSize = 0;
-  return NULL;
+  if(count == 0){
+    *resultSize = 0;
+    return NULL;
+  }
+
+  int *res = (int*)malloc(count * sizeof(int));
+  if (res == NULL){
+    *resultSize = 0;
+    return NULL;
+  }
+
+  int j = 0;
+  for(int i = 0; i < size; i++){
+    if (arr[i] > 0){
+      res[j] = arr[i];
+      j++;
+    }
+  }
+
+  *resultSize = count;
+  return res;
 }
 
 // Задание 17: Транспонирование матрицы (3 балла)
