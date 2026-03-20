@@ -260,7 +260,7 @@ int *filterPositive(const int *arr, int size, int *resultSize) {
   // TODO: Создать новый массив (malloc) только с положительными элементами
   // Записать размер в *resultSize
   // Если положительных нет, вернуть NULL и *resultSize = 0
-  int count;
+  int count = 0;
   for(int i = 0; i < size; i++){
     if (arr[i] > 0){
       count++;
@@ -273,10 +273,6 @@ int *filterPositive(const int *arr, int size, int *resultSize) {
   }
 
   int *res = (int*)malloc(count * sizeof(int));
-  if (res == NULL){
-    *resultSize = 0;
-    return NULL;
-  }
 
   int j = 0;
   for(int i = 0; i < size; i++){
@@ -295,7 +291,14 @@ int *matrixTranspose(const int *matrix, int rows, int cols) {
   // TODO: Создать новую матрицу (malloc) — транспонированную
   // Матрица хранится построчно (row-major)
   // result[j * rows + i] = matrix[i * cols + j]
-  return NULL;
+  int size = rows + cols;
+  int *res = (int*)malloc(size * sizeof(int));
+  for(int i =0; i < rows; i++){
+    for(int j = 0; j < cols; j++){
+      res[j * rows + i] = matrix[i * cols + j];
+    }
+  }
+  return res;
 }
 
 // Задание 18: Обход матрицы по спирали (4 балла)
