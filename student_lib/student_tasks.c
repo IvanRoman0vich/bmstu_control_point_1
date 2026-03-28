@@ -314,6 +314,25 @@ char **stringSplit(const char *str, char delimiter, int *count) {
   // TODO: Разбить строку по разделителю
   // Выделить массив строк и каждую строку через malloc
   // Записать количество частей в *count
+  if (str == NULL){
+    *count = 0;
+    return NULL;
+  }
+
+  int c_word = 1;
+  for(int i = 0; str[i] != '\0'; i++){
+    if (str[i] == delimiter){
+      c_word++;
+    }
+  }
+
+  char **res = (char**)malloc(c_word * sizeof(char*));
+
+  int resIndex = 0;
+  int start = 0;
+
+
+
   *count = 0;
   return NULL;
 }
@@ -322,22 +341,18 @@ char **stringSplit(const char *str, char delimiter, int *count) {
 
 int *polynomialMultiply(const int *a, int sizeA, const int *b, int sizeB,
                         int *resultSize) {
-  // Размер результирующего полинома
   int resSize = sizeA + sizeB - 1;
 
-  // Выделение памяти
   int *result = (int *)malloc(resSize * sizeof(int));
   if (result == NULL) {
     *resultSize = 0;
     return NULL;
   }
 
-  // Обнуление массива
   for (int i = 0; i < resSize; i++) {
     result[i] = 0;
   }
 
-  // Умножение коэффициентов
   for (int i = 0; i < sizeA; i++) {
     for (int j = 0; j < sizeB; j++) {
       result[i + j] += a[i] * b[j];
